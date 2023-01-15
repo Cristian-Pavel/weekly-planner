@@ -1,9 +1,8 @@
 import { Button, Form, Select, TimePicker } from "antd";
 import React, { useState, useContext, useEffect } from "react";
-import dayjs from "dayjs";
 import { SchedulerContext } from "../../Context/ScheduleStateProvider";
+import { options } from "../../static-data/data";
 const { Option } = Select;
-// import { SchedulerContext } from "../../Context";
 
 interface FormData {
 	selectedOption: string | undefined;
@@ -15,6 +14,7 @@ const AddActivity = () => {
 	const [form] = Form.useForm();
 	const [formData, setFormData] = useState({} as FormData); // state to store form data
 	const { scheduleGlobal, setScheduleGlobal, currentDayLabel } = useContext(SchedulerContext);
+	const [isDisabled, setIsDisabled] = useState(false);
 
 	useEffect(() => {
 		const dataToSend = {
@@ -26,22 +26,15 @@ const AddActivity = () => {
 		if (dataToSend.activity !== undefined) setScheduleGlobal([...scheduleGlobal, dataToSend]);
 	}, [formData]);
 
-	const options = [
-		{ key: "option 0", label: "Lista activitati" },
-		{ key: "option1", label: "Alergare usoara" },
-		{ key: "option2", label: "Karate" },
-		{ key: "option3", label: "Tenis" },
-		{ key: "option4", label: "Inot" },
-		{ key: "option5", label: "Fotbal" },
-		{ key: "option6", label: "Handbal" },
-		{ key: "option7", label: "Volei" },
-	];
 	const onFinish = (values: React.SetStateAction<{}> | any) => {
 		const selectedOption = options.find((option) => values.selectedOption === option.key)?.label;
 		const selectedStartTime = values.selectedStartTime.format("HH:mm");
 		const selectedEndTime = values.selectedEndTime.format("HH:mm");
 
+		console.log("form values:", values);
+
 		setFormData({ selectedOption, selectedStartTime, selectedEndTime });
+		setIsDisabled(true);
 	};
 
 	return (
@@ -52,7 +45,7 @@ const AddActivity = () => {
 					name="selectedOption"
 					rules={[{ required: true, message: "Va rog alegeti activitatea" }]}
 				>
-					<Select defaultValue={options[0].key}>
+					<Select placeholder="Lista activitati" onChange={() => setIsDisabled(false)}>
 						{options.map((option) => (
 							<Option key={option.key} value={option.key}>
 								{option.label}
@@ -65,17 +58,17 @@ const AddActivity = () => {
 					name="selectedStartTime"
 					rules={[{ required: true, message: "Va rog alegeti ora de inceput" }]}
 				>
-					<TimePicker /* defaultValue={dayjs("09:00", "HH:mm")} */ format="HH:mm" />
+					<TimePicker placeholder="Ora, minut" format="HH:mm" onChange={() => setIsDisabled(false)} />
 				</Form.Item>
 				<Form.Item
 					label="Pana la"
 					name="selectedEndTime"
 					rules={[{ required: true, message: "Va rog alegeti ora de final" }]}
 				>
-					<TimePicker /* defaultValue={dayjs("18:00", "HH:mm")} */ format="HH:mm" />
+					<TimePicker placeholder="Ora, minut" format="HH:mm" onChange={() => setIsDisabled(false)} />
 				</Form.Item>
 				<Form.Item>
-					<Button type="primary" htmlType="submit">
+					<Button type="primary" htmlType="submit" disabled={isDisabled}>
 						Salveaza
 					</Button>
 				</Form.Item>

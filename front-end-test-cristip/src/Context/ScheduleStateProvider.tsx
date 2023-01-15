@@ -21,7 +21,7 @@ interface Props {
 const SchedulerContext = React.createContext<SchedulerProviderType>({} as SchedulerProviderType);
 
 const SchedulerProvider: React.FC<Props> = ({ children }) => {
-	const [scheduleGlobal, setScheduleGlobal] = useState<SchedulerStateType[]>([]);
+	const [scheduleGlobal, setScheduleGlobal] = useState<SchedulerStateType[]>([{ activity: undefined }]);
 	const [currentDayLabel, setCurrentDayLabel] = useState<String>("");
 	return (
 		<SchedulerContext.Provider value={{ scheduleGlobal, setScheduleGlobal, currentDayLabel, setCurrentDayLabel }}>

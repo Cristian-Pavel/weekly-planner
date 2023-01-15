@@ -6,18 +6,34 @@ const Summary = () => {
 	const { scheduleGlobal } = useContext(SchedulerContext);
 
 	useEffect(() => {}, [scheduleGlobal]);
+	const days = ["Luni", "Marti", "Miercuri", "Joi", "Vineri"] as String[];
 
-	console.log("scheduleGlobal:", scheduleGlobal);
+	const copyScheduleGlobal = [...scheduleGlobal];
+
+	const sortedByDaySchedule =
+		scheduleGlobal[1] &&
+		copyScheduleGlobal.sort((a, b) => {
+			const dayA = a?.day ?? "Luni";
+			const dayB = b?.day ?? "Luni";
+			return days.indexOf(dayA) - days.indexOf(dayB);
+		});
+
 	return (
 		<div>
-			{scheduleGlobal[0].activity === undefined ? (
-				<p>Inca nu sunt activitati programate</p>
+			{!scheduleGlobal[1] ? (
+				<div>
+					<p>Inca nu sunt activitati programate</p>
+				</div>
 			) : (
-				scheduleGlobal.map((data) => (
-					<Row>
+				sortedByDaySchedule.map((data, index) => (
+					<Row key={index}>
 						<Col>
-							<h3>{data.day}</h3>
-							<p>{`${data.startTime}-${data.endTime} ${data.activity}`}</p>
+							{index > 0 && data.day === sortedByDaySchedule[index - 1].day ? (
+								<div>{""}</div>
+							) : (
+								<h3>{data.day}</h3>
+							)}
+							<p>{index > 0 && `${data.startTime}-${data.endTime} ${data.activity}`}</p>
 						</Col>
 					</Row>
 				))
