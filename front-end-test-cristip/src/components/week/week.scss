@@ -51,4 +51,12 @@
 	.ant-tabs-card.ant-tabs-bottom > div > .ant-tabs-nav .ant-tabs-tab:not(:last-of-type) {
 		margin: 0;
 	}
+
+	.navigation-btns-container {
+		border: 1px solid #acacac;
+		border-top: none;
+		padding-bottom: 1rem;
+		display: flex;
+		justify-content: space-around;
+	}
 }

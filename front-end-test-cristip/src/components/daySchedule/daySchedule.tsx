@@ -9,13 +9,12 @@ const DaySchedule: React.FC<DayProps> = ({ dayLabel }) => {
 	return (
 		<div>
 			<label>
-				<p>{`${dayLabel} Dimineata`}</p>
-
+				<p>{`${dayLabel} dimineata`}</p>
 				<AddActivity />
 			</label>
 
 			<label>
-				<p>{`${dayLabel} Seara`}</p>
+				<p>{`${dayLabel} seara`}</p>
 				<AddActivity />
 			</label>
 		</div>

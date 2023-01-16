@@ -107,14 +107,14 @@ const Week: React.FC = () => {
 				</Col>
 			</Row>
 			<Row>
-				<Col xxl={{ span: 7, offset: 8 }}>
+				<Col xxl={{ span: 7, offset: 8 }} className="navigation-btns-container">
 					<Button type="primary" onClick={() => goToPreviousDay()}>
 						{/* {showPreviousDayTitle(currentDay)} */}
 						Ziua anterioara
 					</Button>
 					<Button type="primary" onClick={() => goToNextDay()}>
 						{/* {showNextDayTitle(currentDay)} */}
-						Ziua urmatoare
+						{`${currentDay === "4" ? "Rezumat" : "Ziua urmatoare"}`}
 					</Button>
 				</Col>
 			</Row>
