@@ -1,0 +1,10 @@
+.summary-container {
+	&__day-schedule {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	&__scheduled-activity {
+		margin-left: 1rem;
+	}
+}

@@ -19,24 +19,35 @@ const Summary = () => {
 		});
 
 	return (
-		<div>
+		<div className="summary-container">
 			{!scheduleGlobal[1] ? (
 				<div>
 					<p>Inca nu sunt activitati programate</p>
 				</div>
 			) : (
-				sortedByDaySchedule.map((data, index) => (
-					<Row key={index}>
-						<Col>
-							{index > 0 && data.day === sortedByDaySchedule[index - 1].day ? (
-								<div>{""}</div>
-							) : (
-								<h3>{data.day}</h3>
-							)}
-							<p>{index > 0 && `${data.startTime}-${data.endTime} ${data.activity}`}</p>
-						</Col>
-					</Row>
-				))
+				<div>
+					<h2>Activitatile pe saptamana curenta sunt:</h2>
+					{sortedByDaySchedule.map((data, index) =>
+						index === 0 ? (
+							<span>{""}</span>
+						) : (
+							<Row key={index}>
+								<Col>
+									<div className="summary-container__day-schedule">
+										{index > 0 && data.day === sortedByDaySchedule[index - 1].day ? (
+											<span>{""}</span>
+										) : (
+											<h3>{data.day}</h3>
+										)}
+										<p className="summary-container__scheduled-activity">
+											{index > 0 && `${data.startTime}-${data.endTime} ${data.activity}`}
+										</p>
+									</div>
+								</Col>
+							</Row>
+						)
+					)}
+				</div>
 			)}
 		</div>
 	);

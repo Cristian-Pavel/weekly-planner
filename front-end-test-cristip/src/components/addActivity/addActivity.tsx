@@ -1,4 +1,5 @@
 import { Button, Form, Select, TimePicker } from "antd";
+import dayjs from "dayjs";
 import React, { useState, useContext, useEffect } from "react";
 import { SchedulerContext } from "../../Context/ScheduleStateProvider";
 import { options } from "../../static-data/data";
@@ -12,7 +13,7 @@ interface FormData {
 
 const AddActivity = () => {
 	const [form] = Form.useForm();
-	const [formData, setFormData] = useState({} as FormData); // state to store form data
+	const [formData, setFormData] = useState({} as FormData);
 	const { scheduleGlobal, setScheduleGlobal, currentDayLabel } = useContext(SchedulerContext);
 	const [isDisabled, setIsDisabled] = useState(false);
 
@@ -56,6 +57,7 @@ const AddActivity = () => {
 				<Form.Item
 					label="De la"
 					name="selectedStartTime"
+					validateTrigger={["onChange", "onBlur"]}
 					rules={[{ required: true, message: "Va rog alegeti ora de inceput" }]}
 				>
 					<TimePicker placeholder="Ora, minut" format="HH:mm" onChange={() => setIsDisabled(false)} />
@@ -63,7 +65,21 @@ const AddActivity = () => {
 				<Form.Item
 					label="Pana la"
 					name="selectedEndTime"
-					rules={[{ required: true, message: "Va rog alegeti ora de final" }]}
+					rules={[
+						{ required: true, message: "Va rog alegeti ora de final" },
+						({ getFieldValue }) => ({
+							validator(_, value) {
+								if (!value || !getFieldValue("selectedStartTime")) {
+									return Promise.resolve();
+								}
+								const startTime = getFieldValue("selectedStartTime");
+								if (dayjs(value).isBefore(startTime)) {
+									return Promise.reject("Ora de final trebuie sa fie mai mare decat ora de inceput");
+								}
+								return Promise.resolve();
+							},
+						}),
+					]}
 				>
 					<TimePicker placeholder="Ora, minut" format="HH:mm" onChange={() => setIsDisabled(false)} />
 				</Form.Item>

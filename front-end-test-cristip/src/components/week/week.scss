@@ -1,55 +1,23 @@
 .week-container {
 	margin: 1rem auto;
+	max-width: 90vw;
 
-	// First try
-	// .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
-	// 	/* For tabs border */
-	// 	border-color: black;
-	// }
-
-	// .ant-tabs-top > .ant-tabs-nav::before {
-	// 	/* For the line to the right and close to the tabs */
-	// 	border-color: black;
-	// }
-
-	// .ant-tabs > .ant-tabs-nav {
-	// 	/* So that there is no gap between the content and tabs */
-	// 	margin-bottom: 0;
-	// }
-
-	// .ant-tabs-content-holder {
-	// 	padding: 15px;
-	// 	border: 1px solid black; /* Border for the content part */
-	// 	border-top: transparent; /* Remove the top border so that there is no overlap*/
-	// }
-
-	// Second try
-	// .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab,
-	// .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab {
-	// 	border: 1px solid #acacac;
-	// }
-
-	.ant-tabs-top > .ant-tabs-nav::before,
-	.ant-tabs-bottom > .ant-tabs-nav::before,
-	.ant-tabs-top > div > .ant-tabs-nav::before,
-	.ant-tabs-bottom > div > .ant-tabs-nav::before {
+	.ant-tabs-top > .ant-tabs-nav::before {
 		border-bottom: 1px solid #acacac;
 	}
 
 	.ant-tabs-content-holder {
 		border-left: 1px solid #acacac;
 		border-right: 1px solid #acacac;
+
 		padding: 16px;
 	}
-	.ant-tabs > .ant-tabs-nav,
-	.ant-tabs > div > .ant-tabs-nav {
+	.ant-tabs > .ant-tabs-nav {
 		margin-bottom: 0;
 	}
-	.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab:not(:last-of-type),
-	.ant-tabs-card.ant-tabs-bottom > .ant-tabs-nav .ant-tabs-tab:not(:last-of-type),
-	.ant-tabs-card.ant-tabs-top > div > .ant-tabs-nav .ant-tabs-tab:not(:last-of-type),
-	.ant-tabs-card.ant-tabs-bottom > div > .ant-tabs-nav .ant-tabs-tab:not(:last-of-type) {
-		margin: 0;
+
+	.ant-tabs-tab.ant-tabs-tab-active {
+		border: 1px solid #acacac;
 	}
 
 	.navigation-btns-container {

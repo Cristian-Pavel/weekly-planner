@@ -38,7 +38,7 @@ const Week: React.FC = () => {
 		{
 			key: "0",
 			label: `Luni`,
-			children: <DaySchedule /* dayLabel={currentDay} */ dayLabel="Luni" />,
+			children: <DaySchedule dayLabel="Luni" />,
 		},
 		{
 			key: "1",
@@ -84,36 +84,40 @@ const Week: React.FC = () => {
 		setCurrentDay(currentDay === String(items.length - 1) ? "0" : String(+currentDay + 1));
 	};
 
-	// const showPreviousDayTitle = (currentDay: string) => {
-	// 	return currentDay === "0" ? items[items.length - 1].label : items[Number(currentDay) - 1].label;
-	// };
-
-	// const showNextDayTitle = (currentDay: string) => {
-	// 	return currentDay === String(items.length - 1) ? items[0].label : items[Number(currentDay) + 1].label;
-	// };
-
 	return (
 		<div className="week-container">
 			<Row>
-				<Col xxl={{ span: 7, offset: 8 }}>
+				<Col
+					xxl={{ span: 12, offset: 6 }}
+					xl={{ span: 12, offset: 6 }}
+					lg={{ span: 15, offset: 6 }}
+					md={{ span: 16, offset: 6 }}
+					sm={{ span: 24 }}
+					xs={{ span: 24 }}
+				>
 					<Tabs activeKey={currentDay} items={items} type="card" onChange={handleTabChange}>
 						{items.map((day: any) => (
 							<TabPane tab={day.label} key={day.key}>
 								{day.children}
-								{/* {<DaySchedule dayLabel={day.label} />} */}
 							</TabPane>
 						))}
 					</Tabs>
 				</Col>
 			</Row>
 			<Row>
-				<Col xxl={{ span: 7, offset: 8 }} className="navigation-btns-container">
+				<Col
+					xxl={{ span: 12, offset: 6 }}
+					xl={{ span: 12, offset: 6 }}
+					lg={{ span: 15, offset: 6 }}
+					md={{ span: 16, offset: 6 }}
+					sm={{ span: 24 }}
+					xs={{ span: 24 }}
+					className="navigation-btns-container"
+				>
 					<Button type="primary" onClick={() => goToPreviousDay()}>
-						{/* {showPreviousDayTitle(currentDay)} */}
 						Ziua anterioara
 					</Button>
 					<Button type="primary" onClick={() => goToNextDay()}>
-						{/* {showNextDayTitle(currentDay)} */}
 						{`${currentDay === "4" ? "Rezumat" : "Ziua urmatoare"}`}
 					</Button>
 				</Col>
